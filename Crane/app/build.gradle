@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import com.example.crane.buildsrc.Libs
+//import com.example.crane.buildsrc.Libs
 
 plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+    id "com.android.application"
+    id "kotlin-android"
+    id "kotlin-kapt"
+    id "dagger.hilt.android.plugin"
 }
 
 // Reads the Google maps key that is used in the AndroidManifest
@@ -91,8 +91,8 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerVersion Libs.Kotlin.version
-        kotlinCompilerExtensionVersion Libs.AndroidX.Compose.version
+        kotlinCompilerVersion versions.kotlin
+        kotlinCompilerExtensionVersion versions.androidx.compose
     }
 
     packagingOptions {
@@ -104,39 +104,52 @@ android {
 }
 
 dependencies {
-    implementation Libs.Kotlin.stdlib
-    implementation Libs.Kotlin.Coroutines.android
-    implementation Libs.GoogleMaps.maps
-    implementation Libs.GoogleMaps.mapsKtx
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutine}"
+    implementation "com.google.android.libraries.maps:maps:${versions.googlemaps}"
+    implementation "com.google.maps.android:maps-v3-ktx:${versions.googlemapsKtx}"
 
-    implementation Libs.AndroidX.Compose.runtime
-    implementation Libs.AndroidX.Compose.runtimeLivedata
-    implementation Libs.AndroidX.Compose.foundation
-    implementation Libs.AndroidX.Compose.material
-    implementation Libs.AndroidX.Compose.layout
-    implementation Libs.AndroidX.Compose.animation
-    implementation Libs.AndroidX.Compose.tooling
-    implementation Libs.Accompanist.coil
+    //// Compose
+    implementation "androidx.compose.ui:ui:${versions.androidx.compose}"
+    implementation "androidx.compose.foundation:foundation-layout:${versions.androidx.compose}"
+    implementation "androidx.compose.animation:animation:${versions.androidx.compose}"
 
-    implementation Libs.AndroidX.Lifecycle.viewModelKtx
-    implementation Libs.Hilt.android
-    implementation Libs.Hilt.AndroidX.viewModel
-    compileOnly Libs.AssistedInjection.dagger
-    kapt Libs.Hilt.compiler
-    kapt Libs.Hilt.AndroidX.compiler
-    kapt Libs.AssistedInjection.processor
+    // Tooling support (Previews, etc.)
+    implementation "androidx.compose.ui:ui-tooling:${versions.androidx.compose}"
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation "androidx.compose.foundation:foundation:${versions.androidx.compose}"
+    // Material Design
+    implementation "androidx.compose.material:material:${versions.androidx.compose}"
+    // Material design icons
+    implementation "androidx.compose.material:material-icons-core:${versions.androidx.compose}"
+    implementation "androidx.compose.material:material-icons-extended:${versions.androidx.compose}"
+    // Integration with observables
+    implementation "androidx.compose.runtime:runtime:${versions.androidx.compose}"
+    implementation "androidx.compose.runtime:runtime-livedata:${versions.androidx.compose}"
+    //// Compose
 
-    androidTestImplementation Libs.JUnit.junit
-    androidTestImplementation Libs.AndroidX.Test.runner
-    androidTestImplementation Libs.AndroidX.Test.espressoCore
-    androidTestImplementation Libs.AndroidX.Test.rules
-    androidTestImplementation Libs.AndroidX.Test.Ext.junit
-    androidTestImplementation Libs.Kotlin.Coroutines.test
-    androidTestImplementation Libs.AndroidX.Compose.uiTest
-    androidTestImplementation Libs.Hilt.android
-    androidTestImplementation Libs.Hilt.AndroidX.viewModel
-    androidTestImplementation Libs.Hilt.testing
-    kaptAndroidTest Libs.Hilt.compiler
-    kaptAndroidTest Libs.Hilt.AndroidX.compiler
-    kaptAndroidTest Libs.AssistedInjection.processor
+    implementation "dev.chrisbanes.accompanist:accompanist-coil:${versions.coil}"
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.androidx.lifecycle}"
+    implementation "com.google.dagger:hilt-android:${versions.hilt}"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:${versions.androidx.hilt}"
+    compileOnly "com.squareup.inject:assisted-inject-annotations-dagger2:${versions.injectAssistant}"
+
+    kapt "com.google.dagger:hilt-compiler:${versions.hilt}"
+    kapt "androidx.hilt:hilt-compiler:${versions.androidx.hilt}"
+    kapt "com.squareup.inject:assisted-inject-processor-dagger2:${versions.injectAssistant}"
+
+    androidTestImplementation "androidx.test.ext:junit-ktx:${versions.androidx.junit}"
+    androidTestImplementation "androidx.test:runner:${versions.androidx.junit}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.androidx.espresso}"
+    androidTestImplementation "androidx.test:rules:${versions.androidx.rules}"
+    androidTestImplementation "androidx.test.ext:junit-ktx:${versions.androidx.junit_ktx}"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutine}"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:${versions.androidx.compose}"
+    androidTestImplementation "com.google.dagger:hilt-android:${versions.hilt}"
+    androidTestImplementation "androidx.hilt:hilt-lifecycle-viewmodel:${versions.androidx.hilt}"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:${versions.hilt}"
+    kaptAndroidTest "com.google.dagger:hilt-compiler:${versions.hilt}"
+    kaptAndroidTest "androidx.hilt:hilt-compiler:${versions.androidx.hilt}"
+    kaptAndroidTest "com.squareup.inject:assisted-inject-processor-dagger2:${versions.injectAssistant}"
 }
