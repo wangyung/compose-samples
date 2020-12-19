@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-import com.example.jetcaster.buildsrc.Libs
-
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -88,38 +86,51 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerVersion Libs.Kotlin.version
-        kotlinCompilerExtensionVersion Libs.AndroidX.Compose.version
+        kotlinCompilerVersion versions.kotlin
+        kotlinCompilerExtensionVersion versions.androidx.compose
     }
 }
 
 dependencies {
-    implementation Libs.Kotlin.stdlib
-    implementation Libs.Coroutines.android
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutine}"
 
-    implementation Libs.AndroidX.coreKtx
-    implementation Libs.AndroidX.palette
+    implementation "androidx.core:core-ktx:${versions.androidx.core}"
+    implementation "androidx.palette:palette:${versions.androidx.palette}"
 
-    implementation Libs.AndroidX.Lifecycle.viewmodel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.androidx.lifecycle}"
 
-    implementation Libs.AndroidX.Compose.foundation
-    implementation Libs.AndroidX.Compose.material
-    implementation Libs.AndroidX.Compose.materialIconsExtended
-    implementation Libs.AndroidX.Compose.tooling
+    //// Compose
+    implementation "androidx.compose.ui:ui:${versions.androidx.compose}"
+    implementation "androidx.compose.foundation:foundation-layout:${versions.androidx.compose}"
+    implementation "androidx.compose.animation:animation:${versions.androidx.compose}"
 
-    implementation Libs.Accompanist.coil
+    // Tooling support (Previews, etc.)
+    implementation "androidx.compose.ui:ui-tooling:${versions.androidx.compose}"
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation "androidx.compose.foundation:foundation:${versions.androidx.compose}"
+    // Material Design
+    implementation "androidx.compose.material:material:${versions.androidx.compose}"
+    // Material design icons
+    implementation "androidx.compose.material:material-icons-core:${versions.androidx.compose}"
+    implementation "androidx.compose.material:material-icons-extended:${versions.androidx.compose}"
+    // Integration with observables
+    implementation "androidx.compose.runtime:runtime:${versions.androidx.compose}"
+    implementation "androidx.compose.runtime:runtime-livedata:${versions.androidx.compose}"
+    //// Compose
 
-    implementation Libs.Accompanist.insets
+    implementation "dev.chrisbanes.accompanist:accompanist-coil:${versions.coil}"
+    implementation "dev.chrisbanes.accompanist:accompanist-insets:${versions.coil}"
 
-    implementation Libs.OkHttp.okhttp
-    implementation Libs.OkHttp.logging
+    implementation "com.squareup.okhttp3:okhttp:${versions.okhttp}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
 
-    implementation Libs.Rome.rome
-    implementation Libs.Rome.modules
+    implementation "com.rometools:rome:${versions.rome}"
+    implementation "com.rometools:rome-modules:${versions.rome}"
 
-    implementation Libs.AndroidX.Room.runtime
-    implementation Libs.AndroidX.Room.ktx
-    kapt Libs.AndroidX.Room.compiler
+    implementation "androidx.room:room-runtime:${versions.androidx.room}"
+    implementation "androidx.room:room-ktx:${versions.androidx.room}"
+    kapt "androidx.room:room-compiler:${versions.androidx.room}"
 
-    coreLibraryDesugaring Libs.jdkDesugar
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:${versions.jdkDesugaring}"
 }

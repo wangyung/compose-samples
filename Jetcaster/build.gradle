@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-import com.example.jetcaster.buildsrc.Libs
-import com.example.jetcaster.buildsrc.Versions
 
 buildscript {
+    apply from: "$rootDir/gradle/dependencies.gradle"
     repositories {
         google()
         jcenter()
     }
 
     dependencies {
-        classpath Libs.androidGradlePlugin
-        classpath Libs.Kotlin.gradlePlugin
+        classpath 'com.android.tools.build:gradle:7.0.0-alpha03'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
     }
 }
 
@@ -38,12 +37,6 @@ subprojects {
         google()
         mavenCentral()
         jcenter()
-
-        // Jetpack Compose SNAPSHOTs
-        if (Libs.AndroidX.Compose.version.endsWith("SNAPSHOT")) {
-            maven { url Libs.AndroidX.Compose.snapshotUrl }
-        }
-
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
 
@@ -53,8 +46,7 @@ subprojects {
             target '**/*.kt'
             targetExclude("$buildDir/**/*.kt")
             targetExclude('bin/**/*.kt')
-
-            ktlint(Versions.ktlint)
+            ktlint(versions.ktlint)
             licenseHeaderFile rootProject.file('spotless/copyright.kt')
         }
     }

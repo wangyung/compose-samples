@@ -38,11 +38,6 @@ subprojects {
         google()
         jcenter()
         mavenCentral()
-
-//        if (!Libs.AndroidX.Compose.snapshot.isEmpty()) {
-//            maven { url Urls.composeSnapshotRepo }
-//            maven { url Urls.mavenCentralSnapshotRepo }
-//        }
     }
 
     apply plugin: 'com.diffplug.spotless'
